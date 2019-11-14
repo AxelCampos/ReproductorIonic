@@ -1,0 +1,9 @@
+<ion-content padding>
+  <ion-thumbnail item-start *ngIf="image">
+    <img src="{{image}}"/>
+  </ion-thumbnail>
+  <h2>{{nameSong}}</h2>
+  <ion-list *ngFor="let a of artists">
+    <p>{{a.name}}</p>
+  </ion-list>
+</ion-content>

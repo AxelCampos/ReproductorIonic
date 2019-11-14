@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Ionízate
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-searchbar (ionInput)="search($event)"></ion-searchbar>
+  <div *ngIf="latestSearch?.length>0 && items == undefined">
+    <ion-list *ngFor="let l of latestSearch">
+      <ion-item (click)="searchAlbums(l)">
+        <ion-thumbnail item-start *ngIf="l.images?.length>0">
+           <img src="{{l.images[0].url}}"/>
+        </ion-thumbnail>
+        <h1>Name: {{l.name}}</h1>
+        <ion-badge>{{l.popularity}}</ion-badge>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div *ngIf="items?.length>0">
+      <ion-list *ngFor="let i of items">
+        <ion-item (click)="searchAlbums(i)">
+          <ion-thumbnail item-start *ngIf="i.images?.length>0">
+             <img src="{{i.images[0].url}}"/>
+          </ion-thumbnail>
+          <h1>Name: {{i.name}}</h1>
+          <ion-badge>{{i.popularity}}</ion-badge>
+        </ion-item>
+      </ion-list>
+    </div>
+</ion-content>

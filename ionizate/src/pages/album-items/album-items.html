@@ -1,0 +1,20 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title></ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-thumbnail item-start *ngIf="imageUrl">
+      <h2>{{album.name}}</h2>  
+      <img src="{{imageUrl.url}}" (click)="getSongs(a.id)"/>
+      </ion-thumbnail>
+  <div *ngIf="tracks?.length>0">
+    <ion-list *ngFor="let t of tracks">
+      <ion-item (click)="goToPreview(t.name, t.artists, t.preview_url, imageUrl.url)">
+        <h1>Name: {{t.name}}</h1>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{name}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngIf="albums?.length>0">
+    <ion-list *ngFor="let a of albums">
+      <ion-thumbnail item-start *ngIf="a.images?.length>0">
+        <img src="{{a.images[0].url}}" (click)="getSongs(a.id)"/>
+        <span>Tipo:{{a.type}}</span>
+      </ion-thumbnail>
+      <ion-item>
+        <h1>Album: {{a.name}}</h1>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
