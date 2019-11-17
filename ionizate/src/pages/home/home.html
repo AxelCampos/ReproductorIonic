@@ -6,27 +6,28 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-searchbar (ionInput)="search($event)"></ion-searchbar>
-  <div *ngIf="latestSearch?.length>0 && items == undefined">
-    <ion-list *ngFor="let l of latestSearch">
-      <ion-item (click)="searchAlbums(l)">
-        <ion-thumbnail item-start *ngIf="l.images?.length>0">
+<ion-content padding class="page-home">
+  <ion-searchbar class="inputSearch" (ionInput)="search($event)"></ion-searchbar>
+  <div class="divItems" *ngIf="latestSearch?.length>0 && items == undefined">
+    <h1 text-center class="recentSearchTitle">Últimas búsquedas</h1>
+    <ion-list class="itemArtist" *ngFor="let l of latestSearch">
+      <ion-item class="item" (click)="searchAlbums(l)">
+        <ion-avatar item-start *ngIf="l.images?.length>0">
            <img src="{{l.images[0].url}}"/>
-        </ion-thumbnail>
-        <h1>Name: {{l.name}}</h1>
-        <ion-badge>{{l.popularity}}</ion-badge>
+        </ion-avatar>
+        <h2 class="nameItem">{{l.name}}</h2>
+        <p>{{l.type}}</p>
       </ion-item>
     </ion-list>
   </div>
-  <div *ngIf="items?.length>0">
-      <ion-list *ngFor="let i of items">
-        <ion-item (click)="searchAlbums(i)">
-          <ion-thumbnail item-start *ngIf="i.images?.length>0">
+  <div class="divItems" *ngIf="items?.length>0">
+      <ion-list class="itemArtist" *ngFor="let i of items">
+        <ion-item class="item" (click)="searchAlbums(i)">
+          <ion-avatar item-start *ngIf="i.images?.length>0">
              <img src="{{i.images[0].url}}"/>
-          </ion-thumbnail>
-          <h1>Name: {{i.name}}</h1>
-          <ion-badge>{{i.popularity}}</ion-badge>
+          </ion-avatar>
+          <h2 class="nameItem">{{i.name}}</h2>
+          <p>{{i.type}}</p>
         </ion-item>
       </ion-list>
     </div>

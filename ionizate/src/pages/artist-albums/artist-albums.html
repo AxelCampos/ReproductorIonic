@@ -4,16 +4,44 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <div *ngIf="albums?.length>0">
-    <ion-list *ngFor="let a of albums">
-      <ion-thumbnail item-start *ngIf="a.images?.length>0">
-        <img src="{{a.images[0].url}}" (click)="getSongs(a.id)"/>
-        <span>Tipo:{{a.type}}</span>
-      </ion-thumbnail>
-      <ion-item>
-        <h1>Album: {{a.name}}</h1>
+<ion-content padding class="page-artist-albums">
+  <div text-center>
+    <img *ngIf="image" class="image" src="{{image.url}}"/>
+    <span class="spanPopularity">
+      <h2 class="name">{{name}}</h2>
+      <ion-badge>{{popularity}}</ion-badge>
+    </span>
+    <span *ngIf="follow == true" class="spanFollow">
+      <ion-badge class="followingBadge">Seguido</ion-badge>
+      <ion-icon style="color: white; margin-left: 5px;" name="checkmark-circle"></ion-icon>
+    </span>
+    
+    <ion-badge *ngIf="follow == false" class="followBadge" (click)="setFollow()">Seguir</ion-badge>
+    <p style="color: white;">{{followers}} Seguidores</p>
+  </div>
+  <div *ngIf="topTracks?.length>0">
+    <h1 text-center style="color: white;">Populares</h1>
+    <ion-list class="itemArtist" *ngFor="let t of topTracks">
+      <ion-item class="item">
+        <h2>{{t.name}}</h2>
       </ion-item>
     </ion-list>
   </div>
+  <ion-grid *ngIf="albums?.length>0">
+    <h1 text-center style="color: white;">Albumes</h1>
+    <ion-row>
+      <ion-col *ngFor="let a of albums" col-6 no-padding>
+        <ion-card class="card" *ngIf="a.album_type == 'album'">
+          <ion-card-content>
+              <ion-thumbnail item-start *ngIf="a.images?.length>0">
+                <img src="{{a.images[0].url}}" (click)="getSongs(a.id)"/>
+                <span>{{a.type}}</span>
+                <p>{{a.name}}</p>
+              </ion-thumbnail>
+               
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

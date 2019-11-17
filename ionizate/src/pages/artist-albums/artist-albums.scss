@@ -1,3 +1,47 @@
-page-artist-albums {
-
+.page-artist-albums {
+	background-color: rgb(15, 14, 14);
+}
+.spanPopularity {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	margin-top: 5%;
+}
+.spanFollow {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+.name {
+	margin-right: 5%;
+	color: white;
+}
+.image {
+	width: 50vw;
+	height: 50vw;
+	border-radius: 50%;
+	border: 1px solid rgb(90, 85, 85);
+}
+.followBadge {
+	background-color: transparent;
+	color: white;
+	border: 1px solid rgb(90, 85, 85);
+}
+.followingBadge {
+	background-color: rgb(2, 223, 2);
+	color: white;
+	border: 1px solid rgb(90, 85, 85);
+}
+.card {
+	background-color: rgb(15, 14, 14);
+	border: none;
+}
+.card-content-ios {
+	padding: 0;
+}
+.item {
+	border: none !important;
+	color: white;
 }

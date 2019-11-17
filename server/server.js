@@ -21,6 +21,16 @@ app.post('/latest', function(req, res) {
 	}
 });
 
+app.post('/following', function(req, res) {
+	if (fs.existsSync('../ionizate/src/json/following.json')) {
+		var rawdata = fs.readFileSync('../ionizate/src/json/following.json');
+		var latest = JSON.parse(rawdata);
+		res.send(latest);
+	} else {
+		res.send([]);
+	}
+});
+
 app.post('/checkname', function(req, res) {
 	if (req.body.name.toLowerCase() === 'homer') {
 		res.status(401).send({ message: "Sorry, no Homer's!" });
@@ -40,19 +50,40 @@ app.get('/checkname/:name', function(req, res) {
 	}
 });
 
-app.put('/push-item', function(req, res) {
+app.post('/push-item', function(req, res) {
 	if (fs.existsSync('../ionizate/src/json/search-latest.json')) {
-		console.log('The file exists');
 		var rawdata = fs.readFileSync('../ionizate/src/json/search-latest.json');
 		latest = JSON.parse(rawdata);
 		latest.push(req.body);
 		fs.writeFileSync('../ionizate/src/json/search-latest.json', JSON.stringify(latest));
 	} else {
-		console.log('The file no exists');
 		var arrayLatest = [];
 		arrayLatest.push(req.body);
 		var data = JSON.stringify(arrayLatest);
 		fs.writeFileSync('../ionizate/src/json/search-latest.json', data);
+	}
+});
+
+app.post('/follow-artist', function(req, res) {
+	if (fs.existsSync('../ionizate/src/json/following.json')) {
+		var rawdata = fs.readFileSync('../ionizate/src/json/following.json');
+		latest = JSON.parse(rawdata);
+		latest.push(req.body);
+		fs.writeFileSync('../ionizate/src/json/following.json', JSON.stringify(latest));
+	} else {
+		var arrayLatest = [];
+		arrayLatest.push(req.body);
+		var data = JSON.stringify(arrayLatest);
+		fs.writeFileSync('../ionizate/src/json/following.json', data);
+	}
+});
+
+app.delete('/delete-item', function(req, res) {
+	if (fs.existsSync('../ionizate/src/json/search-latest.json')) {
+		var rawdata = fs.readFileSync('../ionizate/src/json/search-latest.json');
+		latest = JSON.parse(rawdata);
+		latest.shift();
+		fs.writeFileSync('../ionizate/src/json/search-latest.json', JSON.stringify(latest));
 	}
 });
 

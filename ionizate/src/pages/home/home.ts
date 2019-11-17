@@ -18,9 +18,7 @@ export class HomePage {
 		public navCtrl: NavController,
 		private _provider: SpotifyProvider,
 		private _nodeProvider: NodeServerProvider
-	) {
-		this.searchLatest();
-	}
+	) {}
 
 	search(event: any) {
 		let value = event.target.value;
@@ -34,21 +32,27 @@ export class HomePage {
 		);
 	}
 	searchAlbums(item: any) {
+		console.log(item);
 		this._nodeProvider.setLatestJson(item);
 		this.navCtrl.push(ArtistAlbumsPage, {
 			id: item.id,
-			name: item.name
+			name: item.name,
+			image: item.images[0],
+			popularity: item.popularity,
+			followers: item.followers.total
 		});
 	}
 	searchLatest() {
 		this._nodeProvider.searchLatest().subscribe(
 			(data: any) => {
-				console.log(data);
 				this.latestSearch = data;
 			},
 			(error) => {
 				console.log(error);
 			}
 		);
+	}
+	ionViewWillEnter() {
+		this.searchLatest();
 	}
 }
