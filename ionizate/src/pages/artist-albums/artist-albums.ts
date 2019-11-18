@@ -17,8 +17,10 @@ export class ArtistAlbumsPage {
 	private image: string;
 	private popularity: string;
 	private followers: string;
-	private albums: any[];
-	private topTracks: any[];
+	private albums: any[]=[];
+  private singles: any[]=[];
+	private topTracks: any[]=[];
+
 
 	constructor(
 		public navCtrl: NavController,
@@ -39,7 +41,11 @@ export class ArtistAlbumsPage {
 	getAlbums() {
 		this._provider.searchAlbums(this.id).subscribe(
 			(data: any) => {
-				this.albums = data.items;
+				var data = data.items;
+				data.forEach(d=>{
+				  d.total_tracks != '1'? this.albums.push(d) : this.singles.push(d);
+        })
+        console.log(this.singles)
 			},
 			(error) => {
 				console.log(error);
@@ -49,7 +55,16 @@ export class ArtistAlbumsPage {
 	getTopTracks() {
 		this._provider.searchTopTracks(this.id).subscribe(
 			(data: any) => {
-				this.topTracks = data.tracks;
+				var tracks = data.tracks;
+				var count=1;
+				tracks.forEach(t=>{
+				  var item={
+				    id: count,
+            name: t.name,
+          }
+          this.topTracks.push(item);
+				  count++;
+        })
 			},
 			(error) => {
 				console.log(error);
@@ -63,10 +78,7 @@ export class ArtistAlbumsPage {
 				this.following = data;
 				this.following.forEach((x) => {
 					if (x.id == this.id) {
-						console.log('lo ha encontrao');
 						this.follow = true;
-					} else {
-						console.log('no lo ha encontrao');
 					}
 				});
 			},
@@ -90,10 +102,6 @@ export class ArtistAlbumsPage {
 	}
 	ionViewWillEnter() {
 		this.getFollowing();
-		console.log('entra por aqui');
 	}
 
-	ionViewDidLoad() {
-		console.log('ionViewDidLoad ArtistAlbumsPage');
-	}
 }

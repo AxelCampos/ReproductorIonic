@@ -8,19 +8,20 @@
 
 <ion-content padding class="page-home">
   <ion-searchbar class="inputSearch" (ionInput)="search($event)"></ion-searchbar>
-  <div class="divItems" *ngIf="latestSearch?.length>0 && items == undefined">
+  <div class="divItems" *ngIf="(latestSearch?.length>0 && items == undefined) || value == ''">
     <h1 text-center class="recentSearchTitle">Últimas búsquedas</h1>
     <ion-list class="itemArtist" *ngFor="let l of latestSearch">
-      <ion-item class="item" (click)="searchAlbums(l)">
+      <ion-item class="item">
         <ion-avatar item-start *ngIf="l.images?.length>0">
            <img src="{{l.images[0].url}}"/>
         </ion-avatar>
-        <h2 class="nameItem">{{l.name}}</h2>
+        <h2 class="nameItem" (click)="searchAlbums(l)">{{l.name}}</h2>
         <p>{{l.type}}</p>
+        <ion-icon item-end name="md-close" (click)="deleteItem(l.id)"></ion-icon>
       </ion-item>
     </ion-list>
   </div>
-  <div class="divItems" *ngIf="items?.length>0">
+  <div class="divItems" *ngIf="items?.length>0 && value != ''">
       <ion-list class="itemArtist" *ngFor="let i of items">
         <ion-item class="item" (click)="searchAlbums(i)">
           <ion-avatar item-start *ngIf="i.images?.length>0">

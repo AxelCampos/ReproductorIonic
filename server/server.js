@@ -86,5 +86,9 @@ app.delete('/delete-item', function(req, res) {
 		fs.writeFileSync('../ionizate/src/json/search-latest.json', JSON.stringify(latest));
 	}
 });
+app.put('/remove-item', function (req, res){
+	var items = req.body;
+	fs.writeFileSync('../ionizate/src/json/search-latest.json', JSON.stringify(items));
+});
 
-app.listen(process.env.PORT || 8080);
+app.listen(process.env.PORT || 8081);
