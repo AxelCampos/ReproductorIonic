@@ -10,4 +10,19 @@
   <ion-list *ngFor="let a of artists">
     <p>{{a.name}}</p>
   </ion-list>
+  <ion-row>
+    <ion-col *ngIf="url && !playing">
+      <button ion-button icon-left (click)="play(url)" clear small>
+        <ion-icon name="play"></ion-icon>
+        Preview
+      </button>
+    </ion-col>
+    <ion-col *ngIf="url && playing">
+      <button ion-button icon-left (click)="stop()" clear small>
+        <ion-icon name="close"></ion-icon>
+        Stop
+      </button>
+    </ion-col>
+  </ion-row>
+
 </ion-content>

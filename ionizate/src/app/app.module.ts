@@ -11,13 +11,24 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { SpotifyProvider } from '../providers/spotify/spotify';
 import { NodeServerProvider } from '../providers/node-server/node-server';
+import {Media} from "@ionic-native/media";
+
+
+
+
 
 @NgModule({
 	declarations: [ MyApp, HomePage, ArtistAlbumsPage, AlbumItemsPage, PreviusSongsPage ],
 	imports: [ BrowserModule, IonicModule.forRoot(MyApp), HttpClientModule ],
 	bootstrap: [ IonicApp ],
 	entryComponents: [ MyApp, HomePage, ArtistAlbumsPage, AlbumItemsPage, PreviusSongsPage ],
-	providers: [ StatusBar, SplashScreen, { provide: ErrorHandler, useClass: IonicErrorHandler }, SpotifyProvider,
-    NodeServerProvider ]
+	providers: [
+	  StatusBar,
+    SplashScreen,
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    SpotifyProvider,
+    NodeServerProvider,
+    Media
+  ]
 })
 export class AppModule {}

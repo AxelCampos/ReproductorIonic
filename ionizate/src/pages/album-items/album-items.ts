@@ -20,7 +20,6 @@ export class AlbumItemsPage {
 	}
 
 	ionViewDidLoad() {
-		console.log('ionViewDidLoad AlbumItemsPage');
 	}
 	getAlbum() {
 		this._provider.searchAlbum(this.id).subscribe(
@@ -28,7 +27,6 @@ export class AlbumItemsPage {
 				this.album = data;
 				this.imageUrl = this.album.images[0];
 				this.tracks = this.album.tracks.items;
-				console.log(data);
 			},
 			(error) => {
 				console.log(error);
