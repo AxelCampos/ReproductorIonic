@@ -2,27 +2,40 @@
     <ion-navbar>
     </ion-navbar>
   </ion-header>
-<ion-content padding>
-  <ion-thumbnail item-start *ngIf="image">
-    <img src="{{image}}"/>
-  </ion-thumbnail>
-  <h2>{{nameSong}}</h2>
-  <ion-list *ngFor="let a of artists">
-    <p>{{a.name}}</p>
-  </ion-list>
-  <ion-row>
-    <ion-col *ngIf="url && !playing">
-      <button ion-button icon-left (click)="play(url)" clear small>
-        <ion-icon name="play"></ion-icon>
-        Preview
-      </button>
-    </ion-col>
-    <ion-col *ngIf="url && playing">
-      <button ion-button icon-left (click)="stop()" clear small>
-        <ion-icon name="close"></ion-icon>
-        Stop
-      </button>
-    </ion-col>
-  </ion-row>
-
+<ion-content class="page-previus-songs" text-center>
+<ion-scroll scrollX="true">
+  <div style="display: flex; height: 85vh">
+    <ion-list style="min-width: 100%" *ngFor="let t of tracks">
+      <ion-card>
+        <ion-card-content>
+          <ion-thumbnail item-start *ngIf="t.imageURL">
+            <img src="{{t.imageURL.url}}"/>
+          </ion-thumbnail>
+          <h4 class="nameSong">{{t.name}}</h4>
+          <p class="artists">{{t.artists}}</p>
+          <ion-row>
+            <ion-col *ngIf="t.url && !playing">
+              <button ion-button icon-left (click)="play(t.url)" clear small>
+                <ion-icon name="play"></ion-icon>
+                Preview
+              </button>
+            </ion-col>
+            <ion-col *ngIf="t.url && playing">
+              <button ion-button icon-left (click)="stop()" clear small>
+                <ion-icon name="close"></ion-icon>
+                Stop
+              </button>
+            </ion-col>
+            <ion-col>
+              <button ion-button icon-left (click)="open(t.external_url)" clear small>
+                <ion-icon name="open"></ion-icon>
+                Spotify
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
+  </div>
+</ion-scroll>
 </ion-content>

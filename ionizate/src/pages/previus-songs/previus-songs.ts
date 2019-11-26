@@ -8,18 +8,13 @@ import {Media, MediaObject } from "@ionic-native/media";
   templateUrl: 'previus-songs.html'
 })
 export class PreviusSongsPage {
-  private nameSong: string;
-  private artists: any[];
-  private url: string;
-  private image: string;
   private currentTrack: MediaObject = null;
   private playing = false;
+  private tracks: any[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public media: Media, private platform : Platform) {
-    this.nameSong = this.navParams.get('name');
-    this.artists = this.navParams.get('artists');
-    this.url = this.navParams.get('url');
-    this.image = this.navParams.get('image');
+    this.tracks = this.navParams.get('tracks');
+    console.log(this.tracks);
   }
 
   play(item: string) {
@@ -35,6 +30,10 @@ export class PreviusSongsPage {
       this.currentTrack.stop();
       this.playing = false;
     }
+  }
+
+  open(item: string){
+    window.open(item, '_system', 'location=yes');
   }
 
   ionViewDidLoad() {

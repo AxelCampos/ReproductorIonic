@@ -31,22 +31,13 @@ app.post('/following', function(req, res) {
 	}
 });
 
-app.post('/checkname', function(req, res) {
-	if (req.body.name.toLowerCase() === 'homer') {
-		res.status(401).send({ message: "Sorry, no Homer's!" });
+app.post('/saved', function(req, res) {
+	if (fs.existsSync('../ionizate/src/json/albums-saved.json')) {
+		var rawdata = fs.readFileSync('../ionizate/src/json/albums-saved.json');
+		var latest = JSON.parse(rawdata);
+		res.send(latest);
 	} else {
-		res.send({
-			passed: true,
-			message: 'Welcome, friend!'
-		});
-	}
-});
-
-app.get('/checkname/:name', function(req, res) {
-	if (req.params.name.toLowerCase() === 'homer') {
-		res.status(401).send({ message: "Sorry, no Homer's!" });
-	} else {
-		res.json('Welcome!');
+		res.send([]);
 	}
 });
 
@@ -75,6 +66,19 @@ app.post('/follow-artist', function(req, res) {
 		arrayLatest.push(req.body);
 		var data = JSON.stringify(arrayLatest);
 		fs.writeFileSync('../ionizate/src/json/following.json', data);
+	}
+});
+app.post('/save-album', function(req, res) {
+	if (fs.existsSync('../ionizate/src/json/albums-saved.json')) {
+		var rawdata = fs.readFileSync('../ionizate/src/json/albums-saved.json');
+		latest = JSON.parse(rawdata);
+		latest.push(req.body);
+		fs.writeFileSync('../ionizate/src/json/albums-saved.json', JSON.stringify(latest));
+	} else {
+		var arrayLatest = [];
+		arrayLatest.push(req.body);
+		var data = JSON.stringify(arrayLatest);
+		fs.writeFileSync('../ionizate/src/json/albums-saved.json', data);
 	}
 });
 

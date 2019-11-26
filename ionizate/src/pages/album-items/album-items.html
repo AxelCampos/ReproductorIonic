@@ -1,19 +1,24 @@
-
 <ion-header>
   <ion-navbar>
     <ion-title></ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-    <ion-thumbnail item-start *ngIf="imageUrl">
-      <h2>{{album.name}}</h2>  
-      <img src="{{imageUrl.url}}" (click)="getSongs(a.id)"/>
-      </ion-thumbnail>
+<ion-content padding class="page-album-items">
+  <div text-center *ngIf="imageUrl">
+    <img src="{{imageUrl.url}}" class="imageAlbum"/>
+    <h2 style="color: white">{{album.name}}</h2>
+    <ion-badge *ngIf="save == false" class="followBadge" (click)="saveAlbum()">Guardar</ion-badge>
+    <span *ngIf="save == true" class="spanFollow">
+      <ion-badge class="followingBadge">Guardado</ion-badge>
+    </span>
+    <p style="color: white">{{album.type}} by {{name}}</p>
+  </div>
   <div *ngIf="tracks?.length>0">
-    <ion-list *ngFor="let t of tracks">
-      <ion-item (click)="goToPreview(t.name, t.artists, t.preview_url, imageUrl.url)">
-        <h1>Name: {{t.name}}</h1>
+    <ion-list class="itemArtist" *ngFor="let t of tracks">
+      <ion-item class="item" (click)="goToPreview(tracks)">
+        <h2>{{t.name}}</h2>
+        <p>{{t.artists}}</p>
       </ion-item>
     </ion-list>
   </div>

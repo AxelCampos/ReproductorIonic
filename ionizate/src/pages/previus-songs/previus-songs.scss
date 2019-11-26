@@ -1,3 +1,14 @@
-page-previus-songs {
+.page-previus-songs {
+  background-color: rgb(15, 14, 14);
+}
 
+.nameSong{
+  color: white;
+}
+.artists{
+  color: #8e9093;
+}
+
+ion-scroll .scroll-content{
+  height: 100vh;
 }

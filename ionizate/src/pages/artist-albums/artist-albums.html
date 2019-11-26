@@ -22,9 +22,10 @@
   <div *ngIf="topTracks?.length>0">
     <h1 text-center style="color: white;">Populares</h1>
     <ion-list class="itemArtist" *ngFor="let t of topTracks">
-      <ion-item class="item">
-        <h2 item-start>{{t.id}}</h2>
-        <h2>{{t.name}}</h2>
+      <ion-item class="item" (click)="goToPreview(topTracks)">
+        <h2 item-start class="popularId">{{t.id}}</h2>
+        <h2 class="popularName">{{t.name}}</h2>
+        <p>{{t.artists}}</p>
       </ion-item>
     </ion-list>
   </div>
@@ -36,7 +37,6 @@
           <ion-card-content>
               <ion-thumbnail item-start *ngIf="a.images?.length>0">
                 <img src="{{a.images[0].url}}" (click)="getSongs(a.id)"/>
-                <span>{{a.type}}</span>
                 <p>{{a.name}}</p>
               </ion-thumbnail>
 
@@ -45,7 +45,7 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-grid *ngIf="albums?.length>0">
+  <ion-grid *ngIf="singles?.length>0">
     <h1 text-center style="color: white;">Sencillos</h1>
     <ion-row>
       <ion-col *ngFor="let s of singles" col-6 no-padding>
@@ -53,7 +53,6 @@
           <ion-card-content>
             <ion-thumbnail item-start *ngIf="s.images?.length>0">
               <img src="{{s.images[0].url}}" (click)="getSongs(s.id)"/>
-              <span>{{s.type}}</span>
               <p>{{s.name}}</p>
             </ion-thumbnail>
 

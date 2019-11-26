@@ -23,7 +23,9 @@ export class NodeServerProvider {
   getFollowings() {
     return this.http.post(this.baseUrl + 'following', {headers: this.requestHeader});
   }
-
+  getAlbumsSaved() {
+    return this.http.post(this.baseUrl + 'saved', {headers: this.requestHeader});
+  }
   searchLatest() {
     return this.http.post(this.baseUrl + 'latest', {
       headers: this.requestHeader
@@ -68,9 +70,11 @@ export class NodeServerProvider {
   setFollow(id: string) {
     this.http.post(this.baseUrl + 'follow-artist', {id}, {headers: this.requestHeader}).subscribe();
   }
+  save(id: string) {
+    this.http.post(this.baseUrl + 'save-album', {id}, {headers: this.requestHeader}).subscribe();
+  }
 
   deleteItem(id: string) {
-    console.log(id);
     this.searchLatest().subscribe(
       (data: any) => {
         var recently: any[] = data;

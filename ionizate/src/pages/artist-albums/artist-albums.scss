@@ -37,6 +37,7 @@
 .card {
 	background-color: rgb(15, 14, 14);
 	border: none;
+  box-shadow: none;
 }
 .card-content-ios {
 	padding: 0;
@@ -44,4 +45,10 @@
 .item {
 	border: none !important;
 	color: white;
+}
+.popularId{
+  margin: 0 5% 0 0 !important;
+}
+.popularName{
+  margin-top: 0rem !important;
 }
