@@ -21,8 +21,8 @@
   </div>
   <div *ngIf="topTracks?.length>0">
     <h1 text-center style="color: white;">Populares</h1>
-    <ion-list class="itemArtist" *ngFor="let t of topTracks">
-      <ion-item class="item" (click)="goToPreview(topTracks)">
+    <ion-list class="itemArtist" *ngFor="let t of topTracks; let i = index">
+      <ion-item class="item" (click)="goToPreview(topTracks, t.name, t.url, t.external_url, t.artists, i)">
         <h2 item-start class="popularId">{{t.id}}</h2>
         <h2 class="popularName">{{t.name}}</h2>
         <p>{{t.artists}}</p>

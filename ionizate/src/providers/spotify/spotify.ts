@@ -7,7 +7,7 @@ export class SpotifyProvider {
 	private searchUrl: string = this.baseUrl + '/search?q=';
 	private albumsUrl: string = this.baseUrl + '/artists/';
 	private albumUrl: string = this.baseUrl + '/albums/';
-	private auth_token: string = 'Authorization: Bearer BQCLekkn5LcXBKBJd1XOdRauwrtK5hLaJQtaw7iDWDn0kLHNgVnNmxrRickOMk70dT0h--UnWRXLcFzu10HHUeoPrmTdIuMTRlRfrR3LAUXK4JErxeAo4N_PCR0t-kyI2ZQfwMmXDNFcgDN9VwpxH8C1LtszrzbfqauGorgnZSKMDeo';
+	private auth_token: string = 'Authorization:  Bearer BQAaY0t33LqONLcyEhluG6nxOnlsOBkoO9ptmAtA63wkFT-o1psHAComAD4uetPYfJdBdL_CWGDOYkamxcARv9sG0TBGnCu0jBS1k3O1pJDxyQA4YpYnrQNs1awLoiEob1XhqAR-siQFaqdXTwHW2HHIOyUVVp3i5hl2MjuUOn7qy-o';
 
 	private requestHeader = new HttpHeaders()
 		.set('Content-Type', 'application/json')

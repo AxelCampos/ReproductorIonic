@@ -3,39 +3,45 @@
     </ion-navbar>
   </ion-header>
 <ion-content class="page-previus-songs" text-center>
-<ion-scroll scrollX="true">
-  <div style="display: flex; height: 85vh">
-    <ion-list style="min-width: 100%" *ngFor="let t of tracks">
+  <ion-slides (ionSlideNextStart)="doChangeCurrent()" initialSlide="{{index}}">
+    <ion-slide style="min-width: 100%" *ngFor="let t of tracks">
       <ion-card>
         <ion-card-content>
           <ion-thumbnail item-start *ngIf="t.imageURL">
             <img src="{{t.imageURL.url}}"/>
           </ion-thumbnail>
-          <h4 class="nameSong">{{t.name}}</h4>
-          <p class="artists">{{t.artists}}</p>
-          <ion-row>
-            <ion-col *ngIf="t.url && !playing">
-              <button ion-button icon-left (click)="play(t.url)" clear small>
-                <ion-icon name="play"></ion-icon>
-                Preview
-              </button>
-            </ion-col>
-            <ion-col *ngIf="t.url && playing">
-              <button ion-button icon-left (click)="stop()" clear small>
-                <ion-icon name="close"></ion-icon>
-                Stop
-              </button>
-            </ion-col>
-            <ion-col>
-              <button ion-button icon-left (click)="open(t.external_url)" clear small>
-                <ion-icon name="open"></ion-icon>
-                Spotify
-              </button>
-            </ion-col>
-          </ion-row>
         </ion-card-content>
       </ion-card>
-    </ion-list>
+    </ion-slide>
+  </ion-slides>
+  <h4 class="nameSong">{{currentItem.name}}</h4>
+  <p class="artists">{{currentItem.artists}}</p>
+  <ion-row>
+    <ion-col *ngIf="currentItem.url && !playing">
+      <button ion-button icon-left (click)="play(currentItem.url)" clear small>
+        <ion-icon name="play"></ion-icon>
+        Preview
+      </button>
+    </ion-col>
+    <ion-col *ngIf="currentItem.url && playing">
+      <button ion-button icon-left (click)="stop()" clear small>
+        <ion-icon name="close"></ion-icon>
+        Stop
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button icon-left (click)="open(currentItem.external_url)" clear small>
+        <ion-icon name="open"></ion-icon>
+        Spotify
+      </button>
+    </ion-col>
+  </ion-row>
+  <div class="controllerButtonsSong">
+    <button>
+      <ion-icon name="md-skip-backward"></ion-icon>
+    </button>
+    <button>
+      <ion-icon name="md-skip-forward"></ion-icon>
+    </button>
   </div>
-</ion-scroll>
 </ion-content>

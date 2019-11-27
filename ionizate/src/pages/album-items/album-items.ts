@@ -81,10 +81,16 @@ export class AlbumItemsPage {
     );
   }
 
-  goToPreview(tracks: any[]) {
-    console.log(tracks);
+  goToPreview(tracks: any[], name: string, url: string, external_url: string, artists: string, i: number) {
     this.navCtrl.push(PreviusSongsPage, {
-      tracks: tracks
+      index: i,
+      tracks: tracks,
+      currentItem: {
+        name: name,
+        url: url,
+        external_url: external_url,
+        artists: artists
+      }
     });
   }
 
