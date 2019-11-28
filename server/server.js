@@ -4,8 +4,8 @@ var logger = require('morgan');
 var methodOverride = require('method-override');
 var cors = require('cors');
 var fs = require('fs');
-
 var app = express();
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(methodOverride());
