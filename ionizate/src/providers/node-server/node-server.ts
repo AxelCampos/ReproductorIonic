@@ -1,6 +1,6 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {renderComponent} from '@angular/core/src/render3';
+import firebase from "firebase";
 
 @Injectable()
 export class NodeServerProvider {
@@ -11,79 +11,93 @@ export class NodeServerProvider {
 
   private requestHeader = new HttpHeaders().set('Content-Type', 'application/json');
 
-  checkName(name: string) {
-    let data = {
-      name: name
-    };
-    return this.http.post(this.baseUrl + 'checkname', data, {
-      headers: this.requestHeader
-    });
-  }
 
   getFollowings() {
     return this.http.post(this.baseUrl + 'following', {headers: this.requestHeader});
   }
+
   getAlbumsSaved() {
     return this.http.post(this.baseUrl + 'saved', {headers: this.requestHeader});
   }
+
   searchLatest() {
-    return this.http.post(this.baseUrl + 'latest', {
-      headers: this.requestHeader
+    let list = [];
+    return firebase.firestore().collection('busqueda_artistas').get().then(data => {
+      data.docs.forEach(doc => {
+        list.push(doc.data());
+      });
+      return list;
     });
+
   }
 
   setLatestJson(item: any) {
-    this.searchLatest().subscribe(
-      (data: any) => {
-        var recently: any[] = data;
-        var valid = true;
-        if (recently.length == 10) {
-          recently.forEach((x) => {
-            if (x.id == item.id) {
-              valid = false;
-            }
-          });
-          if (valid) {
-            this.http.delete(this.baseUrl + 'delete-item', {headers: this.requestHeader}).subscribe();
-          }
-        } else {
-          recently.forEach((x) => {
-            if (x.id == item.id) {
-              valid = false;
-            }
+    let idDB : string;
+    var valid = true;
+    firebase.firestore().collection('busqueda_artistas').get().then(data => {
+      if (data.docs.length == 10){
+        data.docs.forEach(doc => {
+          if (doc.data().id == item.id)
+            valid = false;
+        });
+        if(valid){
+          idDB =data.docs.pop().id;
+          firebase.firestore().collection("busqueda_artistas").doc(idDB).delete().then(function() {
+            console.log("Document successfully deleted!");
+          }).catch(function(error) {
+            console.error("Error removing document: ", error);
           });
         }
-        if (valid) {
-          this.http
-            .post(this.baseUrl + 'push-item', item, {
-              headers: this.requestHeader
-            })
-            .subscribe();
-        }
-      },
-      (error) => {
-        console.log(error);
+      }else{
+        data.docs.forEach(doc => {
+          if (doc.data().id == item.id)
+            valid = false;
+        });
       }
-    );
+      if(valid){
+        firebase.firestore().collection("busqueda_artistas").add({
+          external_urls: item.external_urls,
+          followers: item.followers,
+          genres: item.genres,
+          href: item.href,
+          id: item.id,
+          images: item.images,
+          name: item.name,
+          popularity: item.popularity,
+          type: item.type,
+          uri: item.uri
+        })
+          .then(function (docRef) {
+            console.log("Document written with ID: ", docRef.id);
+          })
+          .catch(function (error) {
+            console.error("Error adding document: ", error);
+          });
+      }
+    });
   }
 
   setFollow(id: string) {
     this.http.post(this.baseUrl + 'follow-artist', {id}, {headers: this.requestHeader}).subscribe();
   }
+
   save(id: string) {
     this.http.post(this.baseUrl + 'save-album', {id}, {headers: this.requestHeader}).subscribe();
   }
 
   deleteItem(id: string) {
-    this.searchLatest().subscribe(
-      (data: any) => {
-        var recently: any[] = data;
-        recently = recently.filter(i=>{return i.id !== id});
-        this.http.put(this.baseUrl+'remove-item', recently, {headers:this.requestHeader}).subscribe();
-      },
-      error => {
-        console.log(error);
-      }
-    );
-  };
+    let idDB : string;
+      firebase.firestore().collection('busqueda_artistas').get().then(data => {
+      data.docs.forEach(doc => {
+        if (doc.data().id == id)
+          idDB = doc.id;
+
+      });
+        firebase.firestore().collection("busqueda_artistas").doc(idDB).delete().then(function() {
+          console.log("Document successfully deleted!");
+        }).catch(function(error) {
+          console.error("Error removing document: ", error);
+        });
+    });
+  }
 }

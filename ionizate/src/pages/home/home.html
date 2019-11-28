@@ -11,7 +11,7 @@
 
 <ion-content padding class="page-home">
   <ion-searchbar class="inputSearch" (ionInput)="search($event)"></ion-searchbar>
-  <div class="divItems" *ngIf="(latestSearch?.length>0 && items == undefined) || value == ''">
+  <div class="divItems" *ngIf="(latestSearch?.length>0 && items == undefined) || value == '' || value == undefined">
     <h1 text-center class="recentSearchTitle">Últimas búsquedas</h1>
         <ion-list class="itemArtist" *ngFor="let l of latestSearch">
           <ion-item class="item">
@@ -24,7 +24,7 @@
           </ion-item>
         </ion-list>
   </div>
-  <div class="divItems" *ngIf="items?.length>0 && value != ''">
+  <div class="divItems" *ngIf="items?.length>0 && value != '' && value != undefined">
       <ion-list class="itemArtist" *ngFor="let i of items">
         <ion-item class="item" (click)="searchAlbums(i)">
           <ion-avatar item-start *ngIf="i.images?.length>0">

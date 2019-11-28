@@ -11,7 +11,7 @@ import {ArtistAlbumsPage} from '../artist-albums/artist-albums';
 export class HomePage {
   private name: string;
   private items: any[];
-  private latestSearch: any;
+  private latestSearch: any[]=[];
   private value: string;
 
   constructor(
@@ -23,7 +23,6 @@ export class HomePage {
 
   search(event: any) {
     this.value = event.target.value;
-    console.log(this.value);
     if (this.value != '') {
       this._provider.searchArtists(this.value).subscribe(
         (data: any) => {
@@ -48,23 +47,17 @@ export class HomePage {
     });
   }
 
-  searchLatest() {
-    this._nodeProvider.searchLatest().subscribe(
-      (data: any) => {
-        this.latestSearch = data;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+   searchLatest() {
+    this._nodeProvider.searchLatest().then(data => {
+     this.latestSearch = data;
+    });
   }
 
   deleteItem(id: string) {
     this._nodeProvider.deleteItem(id);
     setTimeout(() => {
       this.searchLatest();
-    }, 250)
-    ;
+    }, 500);
   }
 
   ionViewWillEnter() {
