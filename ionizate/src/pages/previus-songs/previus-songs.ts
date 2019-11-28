@@ -44,18 +44,34 @@ export class PreviusSongsPage {
   open(item: string){
     window.open(item, '_system', 'location=yes');
   }
-  doChangeCurrent(){
+  doChangeCurrentNext(){
     if (this.index==0){
       this.acceptChange = true;
+    }
+    if (this.index == this.tracks.length){
+      this.acceptChange = false;
     }
     if (!this.acceptChange){
       this.acceptChange= true;
     }else{
       this.index++;
-      console.log(this.index);
+      for (let i=0; i<=this.tracks.length; i++){
+        if(i == this.index)  this.currentItem = this.tracks[i];
+      }
     }
   }
-  ionSlideNextEnd(){
-    console.log("holados")
+
+  doChangeCurrentPrev(){
+    this.index--;
+    for (let i=0; i<=this.tracks.length; i++){
+      if(i == this.index)  this.currentItem = this.tracks[i];
+    }
+  }
+
+  nextCurrent(){
+    this.slides.slideTo(this.index+1);
+  }
+  prevCurrent(){
+    this.slides.slideTo((this.index -1));
   }
 }

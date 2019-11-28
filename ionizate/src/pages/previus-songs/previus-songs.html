@@ -1,14 +1,18 @@
 <ion-header>
-    <ion-navbar>
+    <ion-navbar text-end>
+      <button ion-button icon-left (click)="open(currentItem.external_url)" clear small>
+        <ion-icon name="open"></ion-icon>
+        Spotify
+      </button>
     </ion-navbar>
   </ion-header>
 <ion-content class="page-previus-songs" text-center>
-  <ion-slides (ionSlideNextStart)="doChangeCurrent()" initialSlide="{{index}}">
+  <ion-slides (ionSlideNextStart)="doChangeCurrentNext()" (ionSlidePrevStart)="doChangeCurrentPrev()" initialSlide="{{index}}">
     <ion-slide style="min-width: 100%" *ngFor="let t of tracks">
       <ion-card>
-        <ion-card-content>
+        <ion-card-content class="contentCard">
           <ion-thumbnail item-start *ngIf="t.imageURL">
-            <img src="{{t.imageURL.url}}"/>
+            <img class="imageSong" src="{{t.imageURL.url}}"/>
           </ion-thumbnail>
         </ion-card-content>
       </ion-card>
@@ -16,32 +20,18 @@
   </ion-slides>
   <h4 class="nameSong">{{currentItem.name}}</h4>
   <p class="artists">{{currentItem.artists}}</p>
-  <ion-row>
-    <ion-col *ngIf="currentItem.url && !playing">
-      <button ion-button icon-left (click)="play(currentItem.url)" clear small>
-        <ion-icon name="play"></ion-icon>
-        Preview
-      </button>
-    </ion-col>
-    <ion-col *ngIf="currentItem.url && playing">
-      <button ion-button icon-left (click)="stop()" clear small>
-        <ion-icon name="close"></ion-icon>
-        Stop
-      </button>
-    </ion-col>
-    <ion-col>
-      <button ion-button icon-left (click)="open(currentItem.external_url)" clear small>
-        <ion-icon name="open"></ion-icon>
-        Spotify
-      </button>
-    </ion-col>
-  </ion-row>
   <div class="controllerButtonsSong">
-    <button>
+    <button ion-button clear small (click)="prevCurrent()">
       <ion-icon name="md-skip-backward"></ion-icon>
     </button>
-    <button>
-      <ion-icon name="md-skip-forward"></ion-icon>
+    <button  class="button-play" *ngIf="currentItem.url && !playing" ion-button  (click)="play(currentItem.url)" clear small>
+      <ion-icon style="margin-left: 4px" class="icon-play" name="play"></ion-icon>
+    </button>
+    <button class="button-play" *ngIf="currentItem.url && playing" ion-button  (click)="stop()" clear small>
+      <ion-icon class="icon-play" name="md-pause"></ion-icon>
+    </button>
+    <button ion-button clear small (click)="nextCurrent()">
+      <ion-icon  name="md-skip-forward"></ion-icon>
     </button>
   </div>
 </ion-content>
