@@ -4,13 +4,16 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
+import {PlaylistPage} from "../pages/playlist/playlist";
+import {SavedAlbumsPage} from "../pages/saved-albums/saved-albums";
+import {FollowsPage} from "../pages/follows/follows";
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   rootPage:any = HomePage;
   @ViewChild(Nav) nav: Nav;
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{ icon: string ,title: string, component: any}>;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
@@ -19,7 +22,10 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
       this.pages = [
-        { title: 'Búsqueda', component: HomePage }
+        { icon: 'ios-search' ,title: 'Búsqueda', component: HomePage },
+        { icon: 'ios-person-add',title: 'Mis artistas', component: FollowsPage },
+        { icon: 'md-disc',title: 'Albumes', component: SavedAlbumsPage },
+        { icon: 'ios-musical-notes',title: 'Playlist', component: PlaylistPage }
       ];
     });
   }

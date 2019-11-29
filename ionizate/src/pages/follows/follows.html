@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Mis artistas</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="page-follows" padding>
+  <div class="divItems" *ngIf="artists?.length>0">
+    <ion-list class="itemArtist" *ngFor="let a of artists">
+      <ion-item class="item">
+        <ion-avatar item-start *ngIf="a.images?.length>0">
+          <img src="{{a.images[0].url}}"/>
+        </ion-avatar>
+        <h2 class="nameItem" (click)="searchAlbums(a)">{{a.name}}</h2>
+        <p>{{a.type}}</p>
+        <ion-icon item-end name="md-close" (click)="deleteItem(a.id)"></ion-icon>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

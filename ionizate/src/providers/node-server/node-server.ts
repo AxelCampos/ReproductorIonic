@@ -1,15 +1,12 @@
-import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import firebase from "firebase";
 
 @Injectable()
 export class NodeServerProvider {
-  private baseUrl: string = 'http://localhost:8081/';
 
-  constructor(public http: HttpClient) {
+  constructor() {
   }
 
-  private requestHeader = new HttpHeaders().set('Content-Type', 'application/json');
 
 
   getFollowings() {
@@ -128,6 +125,36 @@ export class NodeServerProvider {
         }).catch(function(error) {
           console.error("Error removing document: ", error);
         });
+    });
+  }
+  deleteFollows(id: string) {
+    let idDB : string;
+    firebase.firestore().collection('artista_seguido').get().then(data => {
+      data.docs.forEach(doc => {
+        if (doc.data().id == id)
+          idDB = doc.id;
+
+      });
+      firebase.firestore().collection("artista_seguido").doc(idDB).delete().then(function() {
+        console.log("Document successfully deleted!");
+      }).catch(function(error) {
+        console.error("Error removing document: ", error);
+      });
+    });
+  }
+  deleteSavedAlbum(id: string) {
+    let idDB : string;
+    firebase.firestore().collection('albumes_guardados').get().then(data => {
+      data.docs.forEach(doc => {
+        if (doc.data().id == id)
+          idDB = doc.id;
+
+      });
+      firebase.firestore().collection("albumes_guardados").doc(idDB).delete().then(function() {
+        console.log("Document successfully deleted!");
+      }).catch(function(error) {
+        console.error("Error removing document: ", error);
+      });
     });
   }
 }

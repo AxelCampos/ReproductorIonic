@@ -29,7 +29,7 @@ export class AlbumItemsPage {
     this._nodeProvider.save(this.album.id, this.album.name);
     setTimeout(() => {
       this.ionViewWillEnter();
-    }, 500);
+    }, 300);
   }
 
   getAlbumsSaved() {

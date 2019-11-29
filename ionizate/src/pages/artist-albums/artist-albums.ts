@@ -106,6 +106,7 @@ export class ArtistAlbumsPage {
   }
 
   getSongs(id: string) {
+    console.log(this.name);
     this.navCtrl.push(AlbumItemsPage, {
       id: id,
       name: this.name
@@ -116,7 +117,7 @@ export class ArtistAlbumsPage {
     this._nodeProvider.setFollow(this.id, this.name);
     setTimeout(() => {
       this.ionViewWillEnter();
-    }, 500);
+    }, 300);
   }
 
   goToPreview(tracks: any[], name: string, url: string,external_url: string, artists: string, i: number) {

@@ -57,7 +57,7 @@ export class HomePage {
     this._nodeProvider.deleteItem(id);
     setTimeout(() => {
       this.searchLatest();
-    }, 500);
+    }, 300);
   }
 
   ionViewWillEnter() {

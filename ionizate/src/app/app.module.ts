@@ -12,16 +12,19 @@ import { HomePage } from '../pages/home/home';
 import { SpotifyProvider } from '../providers/spotify/spotify';
 import { NodeServerProvider } from '../providers/node-server/node-server';
 import {Media} from "@ionic-native/media";
+import {FollowsPage} from "../pages/follows/follows";
+import {PlaylistPage} from "../pages/playlist/playlist";
+import {SavedAlbumsPage} from "../pages/saved-albums/saved-albums";
 
 
 
 
 
 @NgModule({
-	declarations: [ MyApp, HomePage, ArtistAlbumsPage, AlbumItemsPage, PreviusSongsPage ],
+	declarations: [ MyApp, HomePage, ArtistAlbumsPage, AlbumItemsPage, PreviusSongsPage, FollowsPage,PlaylistPage, SavedAlbumsPage ],
 	imports: [ BrowserModule, IonicModule.forRoot(MyApp), HttpClientModule ],
 	bootstrap: [ IonicApp ],
-	entryComponents: [ MyApp, HomePage, ArtistAlbumsPage, AlbumItemsPage, PreviusSongsPage ],
+	entryComponents: [ MyApp, HomePage, ArtistAlbumsPage, AlbumItemsPage, PreviusSongsPage,FollowsPage,PlaylistPage, SavedAlbumsPage ],
 	providers: [
 	  StatusBar,
     SplashScreen,
