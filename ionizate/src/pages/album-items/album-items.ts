@@ -26,14 +26,14 @@ export class AlbumItemsPage {
 
 
   saveAlbum() {
-    this._nodeProvider.save(this.album.id);
+    this._nodeProvider.save(this.album.id, this.album.name);
     setTimeout(() => {
       this.ionViewWillEnter();
     }, 500);
   }
 
   getAlbumsSaved() {
-    this._nodeProvider.getAlbumsSaved().subscribe(
+    this._nodeProvider.getAlbumsSaved().then(
       (data: any) => {
         this.albumsSaved = data;
         this.albumsSaved.forEach((x) => {

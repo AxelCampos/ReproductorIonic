@@ -13,11 +13,23 @@ export class NodeServerProvider {
 
 
   getFollowings() {
-    return this.http.post(this.baseUrl + 'following', {headers: this.requestHeader});
+    let list = [];
+    return firebase.firestore().collection('artista_seguido').get().then(data => {
+      data.docs.forEach(doc => {
+        list.push(doc.data());
+      });
+      return list;
+    });
   }
 
   getAlbumsSaved() {
-    return this.http.post(this.baseUrl + 'saved', {headers: this.requestHeader});
+    let list = [];
+    return firebase.firestore().collection('albumes_guardados').get().then(data => {
+      data.docs.forEach(doc => {
+        list.push(doc.data());
+      });
+      return list;
+    });
   }
 
   searchLatest() {
@@ -77,12 +89,30 @@ export class NodeServerProvider {
     });
   }
 
-  setFollow(id: string) {
-    this.http.post(this.baseUrl + 'follow-artist', {id}, {headers: this.requestHeader}).subscribe();
+  setFollow(id: string, name: string) {
+    firebase.firestore().collection("artista_seguido").add({
+      id: id,
+      name: name
+    })
+      .then(function (docRef) {
+        console.log("Document written with ID: ", docRef.id);
+      })
+      .catch(function (error) {
+        console.error("Error adding document: ", error);
+      });
   }
 
-  save(id: string) {
-    this.http.post(this.baseUrl + 'save-album', {id}, {headers: this.requestHeader}).subscribe();
+  save(id: string, name: string) {
+    firebase.firestore().collection("albumes_guardados").add({
+      id: id,
+      name: name
+    })
+      .then(function (docRef) {
+        console.log("Document written with ID: ", docRef.id);
+      })
+      .catch(function (error) {
+        console.error("Error adding document: ", error);
+      });
   }
 
   deleteItem(id: string) {

@@ -90,7 +90,7 @@ export class ArtistAlbumsPage {
   }
 
   getFollowing() {
-    this._nodeProvider.getFollowings().subscribe(
+    this._nodeProvider.getFollowings().then(
       (data: any) => {
         this.following = data;
         this.following.forEach((x) => {
@@ -113,7 +113,7 @@ export class ArtistAlbumsPage {
   }
 
   setFollow() {
-    this._nodeProvider.setFollow(this.id);
+    this._nodeProvider.setFollow(this.id, this.name);
     setTimeout(() => {
       this.ionViewWillEnter();
     }, 500);
