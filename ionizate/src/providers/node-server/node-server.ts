@@ -39,6 +39,16 @@ export class NodeServerProvider {
     });
 
   }
+  getPlaylist(){
+    let list = [];
+    return firebase.firestore().collection('playlist').get().then(data=>{
+      data.docs.forEach(doc =>{
+        list.push(doc.id);
+      });
+      return list;
+    })
+
+  }
 
   setLatestJson(item: any) {
     let idDB : string;
@@ -155,6 +165,11 @@ export class NodeServerProvider {
       }).catch(function(error) {
         console.error("Error removing document: ", error);
       });
+    });
+  }
+  savePlaylist(name:string){
+    firebase.firestore().collection("playlist").doc(name).set({}).then(function() {
+      console.log("Document successfully written!");
     });
   }
 }

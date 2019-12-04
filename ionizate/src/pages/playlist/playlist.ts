@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {IonicPage, ModalController, ModalOptions, NavController, NavParams} from 'ionic-angular';
+import {ModalPlaylistPage} from "../modal-playlist/modal-playlist";
+import {NodeServerProvider} from "../../providers/node-server/node-server";
 
 /**
  * Generated class for the PlaylistPage page.
@@ -14,12 +16,32 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'playlist.html',
 })
 export class PlaylistPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  private playlist: any []=[];
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public modalCtrl: ModalController,
+    private _nodeProvider: NodeServerProvider) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PlaylistPage');
+  addPlaylist() {
+    let modal = this.modalCtrl.create(ModalPlaylistPage);
+    modal.present();
+    modal.onDidDismiss(()=>{
+      this.getPlayList();
+    })
   }
 
+  getPlayList() {
+    this._nodeProvider.getPlaylist().then(data => {
+      this.playlist = data;
+    });
+  }
+
+  ionViewWillEnter() {
+    this.getPlayList();
+  }
 }
+
+
+

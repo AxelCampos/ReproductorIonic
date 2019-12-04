@@ -1,12 +1,25 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar class="headerPlaylist">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Playlist</ion-title>
+    <button class="buttonAdd" (click)="addPlaylist()">
+      <ion-icon class="iconAdd" name="md-add-circle"></ion-icon>
+    </button>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-
+<ion-content padding class="page-playlist">
+  <div class="divItems" *ngIf="playlist?.length>0">
+    <ion-list class="itemArtist" *ngFor="let p of playlist">
+      <ion-item class="item">
+        <ion-thumbnail item-start *ngIf="p.images?.length>0">
+          <img src="{{p.images[0].url}}"/>
+        </ion-thumbnail>
+        <h2 class="nameItem">{{p}}</h2>
+        <ion-icon item-end name="md-close"></ion-icon>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>

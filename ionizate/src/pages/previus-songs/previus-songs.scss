@@ -4,6 +4,7 @@
 
 .nameSong{
   color: white;
+  margin-bottom: 0;
 }
 
 .artists{
@@ -45,4 +46,20 @@ ion-slides .swiper-wrapper{
 }
 .icon-play{
   font-size: 3.2em !important;
+}
+.currentContainer{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.nameCurrent{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.iconCurrent{
+  color: white;
+  font-size: 2em;
 }

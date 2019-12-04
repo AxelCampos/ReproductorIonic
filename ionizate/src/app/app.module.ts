@@ -15,16 +15,15 @@ import {Media} from "@ionic-native/media";
 import {FollowsPage} from "../pages/follows/follows";
 import {PlaylistPage} from "../pages/playlist/playlist";
 import {SavedAlbumsPage} from "../pages/saved-albums/saved-albums";
-
-
+import {ModalPlaylistPage} from "../pages/modal-playlist/modal-playlist";
 
 
 
 @NgModule({
-	declarations: [ MyApp, HomePage, ArtistAlbumsPage, AlbumItemsPage, PreviusSongsPage, FollowsPage,PlaylistPage, SavedAlbumsPage ],
+	declarations: [ MyApp, HomePage, ArtistAlbumsPage, ModalPlaylistPage,AlbumItemsPage, PreviusSongsPage, FollowsPage,PlaylistPage, SavedAlbumsPage ],
 	imports: [ BrowserModule, IonicModule.forRoot(MyApp), HttpClientModule ],
 	bootstrap: [ IonicApp ],
-	entryComponents: [ MyApp, HomePage, ArtistAlbumsPage, AlbumItemsPage, PreviusSongsPage,FollowsPage,PlaylistPage, SavedAlbumsPage ],
+	entryComponents: [ MyApp, HomePage, ModalPlaylistPage,ArtistAlbumsPage, AlbumItemsPage, PreviusSongsPage,FollowsPage,PlaylistPage, SavedAlbumsPage ],
 	providers: [
 	  StatusBar,
     SplashScreen,
@@ -34,4 +33,5 @@ import {SavedAlbumsPage} from "../pages/saved-albums/saved-albums";
     Media
   ]
 })
-export class AppModule {}
+export class AppModule {
+}

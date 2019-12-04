@@ -1,3 +1,13 @@
-page-playlist {
-
+.page-playlist {
+  background-color: rgb(15, 14, 14);
+}
+.headerPlaylist .toolbar-content{
+  display: flex;
+  flex-direction: row;
+}
+.buttonAdd{
+  background-color: transparent;
+}
+.iconAdd{
+  font-size: 1.5em;
 }
