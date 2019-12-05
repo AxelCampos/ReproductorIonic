@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content text-center padding>
+  <button (click)="addPlaylist()">Crear nueva playlist</button>
+  <div class="divItems" *ngIf="playlist?.length>0">
+    <ion-list class="itemArtist" *ngFor="let p of playlist">
+      <ion-item class="item" (click)="saveInPlaylist(p)">
+        <ion-thumbnail item-start *ngIf="p.images?.length>0">
+          <img src="{{p.images[0].url}}"/>
+        </ion-thumbnail>
+        <h2 class="nameItem">{{p}}</h2>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

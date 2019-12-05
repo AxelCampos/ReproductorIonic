@@ -1,7 +1,17 @@
 .page-modal-song {
-  background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 16%, rgba(133,129,128,1) 36%, rgba(90,86,85,1) 61%, rgba(90,85,85,1) 89%, rgba(43,43,43,1) 99%, rgba(43,43,43,1) 100%);
   background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 16%, rgba(133,129,128,1) 36%, rgba(90,86,85,1) 61%, rgba(90,85,85,1) 89%, rgba(43,43,43,1) 99%, rgba(43,43,43,1) 100%);
-  background: -o-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 16%, rgba(133,129,128,1) 36%, rgba(90,86,85,1) 61%, rgba(90,85,85,1) 89%, rgba(43,43,43,1) 99%, rgba(43,43,43,1) 100%);
-  background: -ms-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 16%, rgba(133,129,128,1) 36%, rgba(90,86,85,1) 61%, rgba(90,85,85,1) 89%, rgba(43,43,43,1) 99%, rgba(43,43,43,1) 100%);
   background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 16%, rgba(133,129,128,1) 36%, rgba(90,86,85,1) 61%, rgba(90,85,85,1) 89%, rgba(43,43,43,1) 99%, rgba(43,43,43,1) 100%);
+}
+.scrollModal{
+  height: 35vh;
+}
+.marginBottom5{
+  margin-bottom: 5%;
+}
+.modalItem{
+  background-color:rgb(90,85,85);
+  text-align: center;
+}
+.modalItem ion-label{
+  font-size: 1.5em;
 }

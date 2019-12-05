@@ -3,7 +3,7 @@
   <h2>Nombre de la playlist:</h2>
   <ion-input class="inputModal" (ionChange)="setNamePlaylist($event)">{{namePlaylist}}</ion-input>
   <div class="modalButtons">
-    <button>Cancelar</button>
+    <button (click)="closeModal()">Cancelar</button>
     <button *ngIf="namePlaylist == '' || namePlaylist == undefined" (click)="savePlaylist(false)">Skip</button>
     <button *ngIf="namePlaylist != '' && namePlaylist != undefined" (click)="savePlaylist(true)">Crear</button>
   </div>

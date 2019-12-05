@@ -131,6 +131,20 @@ export class NodeServerProvider {
       });
   }
 
+  setPlaylist(id: string, item: any){
+    console.log(item);
+    let list;
+    firebase.firestore().collection('playlist').doc(id).get().then(data => {
+      list = data.data();
+      let song= 'song'+(Object.keys(list).length+1);
+      list[song]=item;
+      firebase.firestore().collection("playlist").doc(id).set(list).then(function () {
+        console.log("Document successfully written!");
+      });
+    });
+
+  }
+
   save(id: string, name: string) {
     firebase.firestore().collection("albumes_guardados").add({
       id: id,

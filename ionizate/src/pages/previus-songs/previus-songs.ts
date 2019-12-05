@@ -125,10 +125,14 @@ export class PreviusSongsPage {
       name: this.currentItem.name,
       url: this.currentItem.url,
       external_url: this.currentItem.external_url,
-      imageURL: image
+      imageURL: image,
+      saved: this.savedSong
     };
     let modal = this.modalCtrl.create(ModalSongPage, item);
     modal.present();
+    modal.onDidDismiss(()=>{
+      this.getSong();
+    })
   }
   ionViewWillEnter(){
     this.getSong();

@@ -29,12 +29,26 @@ export class ModalPlaylistPage {
   }
 
   savePlaylist(resp: boolean) {
-    if (resp) {
-      this._nodeProvider.savePlaylist(this.namePlaylist);
-    } else {
-      let name = 'playlist'+(this.playlist.length+1);
-      this._nodeProvider.savePlaylist(name);
+    let  valid = this.navParams.get('valid');
+    if(valid){
+      let item = this.navParams.get('item');
+      if (resp) {
+        this._nodeProvider.setPlaylist(this.namePlaylist, item);
+      } else {
+        let name = 'playlist' + (this.playlist.length + 1);
+        this._nodeProvider.setPlaylist(name, item);
+      }
+    }else {
+      if (resp) {
+        this._nodeProvider.savePlaylist(this.namePlaylist);
+      } else {
+        let name = 'playlist' + (this.playlist.length + 1);
+        this._nodeProvider.savePlaylist(name);
+      }
     }
+    this.viewCtrl.dismiss();
+  }
+  closeModal(){
     this.viewCtrl.dismiss();
   }
 

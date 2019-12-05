@@ -1,7 +1,14 @@
 <ion-content class="page-modal-song" padding>
   <div text-center>
-    <img *ngIf="item.imageURL" src="{{item.imageURL.url}}" class="imageAlbum"/>
-    <h2 style="color: white">{{item.name}}</h2>
-    <p style="color: white">{{item.artists}}</p>
+    <img *ngIf="item.imageURL" src="{{item.imageURL.url}}" class="imageAlbum marginBottom5"/>
+    <ion-scroll class="scrollModal" scrollY="true">
+      <h2 style="color: white">{{item.name}}</h2>
+      <p style="color: white">{{item.artists}}</p>
+      <ion-list>
+        <ion-item class="modalItem" *ngIf="saved == false" (click)="saveTrack()">Guardar</ion-item>
+        <ion-item class="modalItem" *ngIf="saved == true" (click)="deleteItem()">Borrar</ion-item>
+        <ion-item class="modalItem" (click)="doHandleAddPlaylist()">Añadir a playlist</ion-item>
+      </ion-list>
+    </ion-scroll>
   </div>
 </ion-content>

@@ -18,6 +18,7 @@ import {SavedAlbumsPage} from "../pages/saved-albums/saved-albums";
 import {ModalPlaylistPage} from "../pages/modal-playlist/modal-playlist";
 import {MySongsPage} from "../pages/my-songs/my-songs";
 import {ModalSongPage} from "../pages/modal-song/modal-song";
+import {BeforeAddPlaylistPage} from "../pages/before-add-playlist/before-add-playlist";
 
 
 
@@ -33,7 +34,8 @@ import {ModalSongPage} from "../pages/modal-song/modal-song";
     PlaylistPage,
     SavedAlbumsPage,
     MySongsPage,
-    ModalSongPage
+    ModalSongPage,
+    BeforeAddPlaylistPage
   ],
 	imports: [ BrowserModule, IonicModule.forRoot(MyApp), HttpClientModule ],
 	bootstrap: [ IonicApp ],
@@ -48,7 +50,8 @@ import {ModalSongPage} from "../pages/modal-song/modal-song";
     PlaylistPage,
     SavedAlbumsPage,
     MySongsPage,
-    ModalSongPage
+    ModalSongPage,
+    BeforeAddPlaylistPage
   ],
 	providers: [
 	  StatusBar,
