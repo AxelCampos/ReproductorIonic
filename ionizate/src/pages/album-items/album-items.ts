@@ -95,7 +95,7 @@ export class AlbumItemsPage {
   }
 
   ionViewWillEnter() {
-    this.getAlbumsSaved()
+    this.getAlbumsSaved();
   }
 
 }

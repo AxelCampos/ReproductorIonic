@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import {PlaylistPage} from "../pages/playlist/playlist";
 import {SavedAlbumsPage} from "../pages/saved-albums/saved-albums";
 import {FollowsPage} from "../pages/follows/follows";
+import {MySongsPage} from "../pages/my-songs/my-songs";
 @Component({
   templateUrl: 'app.html'
 })
@@ -24,6 +25,7 @@ export class MyApp {
       this.pages = [
         { icon: 'ios-search' ,title: 'Búsqueda', component: HomePage },
         { icon: 'ios-person-add',title: 'Mis artistas', component: FollowsPage },
+        { icon: 'ios-musical-note',title: 'Mis canciones', component: MySongsPage },
         { icon: 'md-disc',title: 'Albumes', component: SavedAlbumsPage },
         { icon: 'ios-musical-notes',title: 'Playlist', component: PlaylistPage }
       ];

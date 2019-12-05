@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Mis canciones</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="page-my-songs" padding>
+  <div class="divItems" *ngIf="songs?.length>0">
+    <ion-list class="itemArtist" *ngFor="let s of songs; let i = index">
+      <ion-item class="item">
+        <ion-thumbnail item-start *ngIf="s.imageURL">
+          <img src="{{s.imageURL.url}}"/>
+        </ion-thumbnail>
+        <h2 class="nameItem" (click)="goToPreview(songs, s.name, s.url, s.external_url, s.artists, i)">{{s.name}}</h2>
+        <p>{{s.artists}}</p>
+        <ion-icon item-end name="md-close" (click)="deleteItem(s.url)"></ion-icon>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

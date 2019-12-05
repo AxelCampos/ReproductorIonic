@@ -16,14 +16,40 @@ import {FollowsPage} from "../pages/follows/follows";
 import {PlaylistPage} from "../pages/playlist/playlist";
 import {SavedAlbumsPage} from "../pages/saved-albums/saved-albums";
 import {ModalPlaylistPage} from "../pages/modal-playlist/modal-playlist";
+import {MySongsPage} from "../pages/my-songs/my-songs";
+import {ModalSongPage} from "../pages/modal-song/modal-song";
 
 
 
 @NgModule({
-	declarations: [ MyApp, HomePage, ArtistAlbumsPage, ModalPlaylistPage,AlbumItemsPage, PreviusSongsPage, FollowsPage,PlaylistPage, SavedAlbumsPage ],
+	declarations: [
+	  MyApp,
+    HomePage,
+    ArtistAlbumsPage,
+    ModalPlaylistPage,
+    AlbumItemsPage,
+    PreviusSongsPage,
+    FollowsPage,
+    PlaylistPage,
+    SavedAlbumsPage,
+    MySongsPage,
+    ModalSongPage
+  ],
 	imports: [ BrowserModule, IonicModule.forRoot(MyApp), HttpClientModule ],
 	bootstrap: [ IonicApp ],
-	entryComponents: [ MyApp, HomePage, ModalPlaylistPage,ArtistAlbumsPage, AlbumItemsPage, PreviusSongsPage,FollowsPage,PlaylistPage, SavedAlbumsPage ],
+	entryComponents: [
+	  MyApp,
+    HomePage,
+    ModalPlaylistPage,
+    ArtistAlbumsPage,
+    AlbumItemsPage,
+    PreviusSongsPage,
+    FollowsPage,
+    PlaylistPage,
+    SavedAlbumsPage,
+    MySongsPage,
+    ModalSongPage
+  ],
 	providers: [
 	  StatusBar,
     SplashScreen,

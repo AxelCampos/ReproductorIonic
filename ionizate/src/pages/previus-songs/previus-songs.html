@@ -20,12 +20,13 @@
     </ion-slide>
   </ion-slides>
   <div class="currentContainer">
-    <ion-icon class="iconCurrent" name="md-add"></ion-icon>
+    <ion-icon *ngIf="savedSong == true" style="color: #02df02" class="iconCurrent" name="md-add"></ion-icon>
+    <ion-icon *ngIf="savedSong == false" class="iconCurrent" name="md-add" (click)="setSong(tracks[index].imageURL)"></ion-icon>
     <div class="nameCurrent">
       <h4 class="nameSong">{{currentItem.name}}</h4>
       <p class="artists">{{currentItem.artists}}</p>
     </div>
-    <ion-icon class="iconCurrent" name="md-more"></ion-icon>
+    <ion-icon class="iconCurrent" name="md-more" (click)="openModal(tracks[index].imageURL)"></ion-icon>
   </div>
   <div class="controllerButtonsSong">
     <button ion-button clear small (click)="prevCurrent()">

@@ -106,7 +106,6 @@ export class ArtistAlbumsPage {
   }
 
   getSongs(id: string) {
-    console.log(this.name);
     this.navCtrl.push(AlbumItemsPage, {
       id: id,
       name: this.name

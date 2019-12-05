@@ -8,10 +8,19 @@ export class NodeServerProvider {
   }
 
 
-
   getFollowings() {
     let list = [];
     return firebase.firestore().collection('artista_seguido').get().then(data => {
+      data.docs.forEach(doc => {
+        list.push(doc.data());
+      });
+      return list;
+    });
+  }
+
+  getSongs() {
+    let list = [];
+    return firebase.firestore().collection('songs').get().then(data => {
       data.docs.forEach(doc => {
         list.push(doc.data());
       });
@@ -39,10 +48,11 @@ export class NodeServerProvider {
     });
 
   }
-  getPlaylist(){
+
+  getPlaylist() {
     let list = [];
-    return firebase.firestore().collection('playlist').get().then(data=>{
-      data.docs.forEach(doc =>{
+    return firebase.firestore().collection('playlist').get().then(data => {
+      data.docs.forEach(doc => {
         list.push(doc.id);
       });
       return list;
@@ -51,29 +61,29 @@ export class NodeServerProvider {
   }
 
   setLatestJson(item: any) {
-    let idDB : string;
+    let idDB: string;
     var valid = true;
     firebase.firestore().collection('busqueda_artistas').get().then(data => {
-      if (data.docs.length == 10){
+      if (data.docs.length == 10) {
         data.docs.forEach(doc => {
           if (doc.data().id == item.id)
             valid = false;
         });
-        if(valid){
-          idDB =data.docs.pop().id;
-          firebase.firestore().collection("busqueda_artistas").doc(idDB).delete().then(function() {
+        if (valid) {
+          idDB = data.docs.pop().id;
+          firebase.firestore().collection("busqueda_artistas").doc(idDB).delete().then(function () {
             console.log("Document successfully deleted!");
-          }).catch(function(error) {
+          }).catch(function (error) {
             console.error("Error removing document: ", error);
           });
         }
-      }else{
+      } else {
         data.docs.forEach(doc => {
           if (doc.data().id == item.id)
             valid = false;
         });
       }
-      if(valid){
+      if (valid) {
         firebase.firestore().collection("busqueda_artistas").add({
           external_urls: item.external_urls,
           followers: item.followers,
@@ -109,6 +119,18 @@ export class NodeServerProvider {
       });
   }
 
+  setSong(item) {
+    firebase.firestore().collection('songs').add({
+      item
+    })
+      .then(function (docRef) {
+        console.log("Document written with ID: ", docRef.id);
+      })
+      .catch(function (error) {
+        console.error("Error adding document: ", error);
+      });
+  }
+
   save(id: string, name: string) {
     firebase.firestore().collection("albumes_guardados").add({
       id: id,
@@ -123,52 +145,71 @@ export class NodeServerProvider {
   }
 
   deleteItem(id: string) {
-    let idDB : string;
-      firebase.firestore().collection('busqueda_artistas').get().then(data => {
+    let idDB: string;
+    firebase.firestore().collection('busqueda_artistas').get().then(data => {
       data.docs.forEach(doc => {
         if (doc.data().id == id)
           idDB = doc.id;
 
       });
-        firebase.firestore().collection("busqueda_artistas").doc(idDB).delete().then(function() {
-          console.log("Document successfully deleted!");
-        }).catch(function(error) {
-          console.error("Error removing document: ", error);
-        });
+      firebase.firestore().collection("busqueda_artistas").doc(idDB).delete().then(function () {
+        console.log("Document successfully deleted!");
+      }).catch(function (error) {
+        console.error("Error removing document: ", error);
+      });
     });
   }
+
   deleteFollows(id: string) {
-    let idDB : string;
+    let idDB: string;
     firebase.firestore().collection('artista_seguido').get().then(data => {
       data.docs.forEach(doc => {
         if (doc.data().id == id)
           idDB = doc.id;
 
       });
-      firebase.firestore().collection("artista_seguido").doc(idDB).delete().then(function() {
+      firebase.firestore().collection("artista_seguido").doc(idDB).delete().then(function () {
         console.log("Document successfully deleted!");
-      }).catch(function(error) {
+      }).catch(function (error) {
         console.error("Error removing document: ", error);
       });
     });
   }
+
   deleteSavedAlbum(id: string) {
-    let idDB : string;
+    let idDB: string;
     firebase.firestore().collection('albumes_guardados').get().then(data => {
       data.docs.forEach(doc => {
         if (doc.data().id == id)
           idDB = doc.id;
 
       });
-      firebase.firestore().collection("albumes_guardados").doc(idDB).delete().then(function() {
+      firebase.firestore().collection("albumes_guardados").doc(idDB).delete().then(function () {
         console.log("Document successfully deleted!");
-      }).catch(function(error) {
+      }).catch(function (error) {
         console.error("Error removing document: ", error);
       });
     });
   }
-  savePlaylist(name:string){
-    firebase.firestore().collection("playlist").doc(name).set({}).then(function() {
+
+  deleteSong(url: string) {
+    let idDB: string;
+    firebase.firestore().collection('songs').get().then(data => {
+      data.docs.forEach(doc => {
+        if (doc.data().item.url == url) {
+          idDB = doc.id;
+        }
+      });
+      firebase.firestore().collection("songs").doc(idDB).delete().then(function () {
+        console.log("Document successfully deleted!");
+      }).catch(function (error) {
+        console.error("Error removing document: ", error);
+      });
+    });
+  }
+
+  savePlaylist(name: string) {
+    firebase.firestore().collection("playlist").doc(name).set({}).then(function () {
       console.log("Document successfully written!");
     });
   }

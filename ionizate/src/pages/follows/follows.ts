@@ -4,13 +4,6 @@ import {SpotifyProvider} from "../../providers/spotify/spotify";
 import {NodeServerProvider} from "../../providers/node-server/node-server";
 import {ArtistAlbumsPage} from "../artist-albums/artist-albums";
 
-/**
- * Generated class for the FollowsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-follows',
