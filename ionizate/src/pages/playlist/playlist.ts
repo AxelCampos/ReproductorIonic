@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {IonicPage, ModalController, ModalOptions, NavController, NavParams} from 'ionic-angular';
 import {ModalPlaylistPage} from "../modal-playlist/modal-playlist";
 import {NodeServerProvider} from "../../providers/node-server/node-server";
+import {AlbumItemsPage} from "../album-items/album-items";
 
 /**
  * Generated class for the PlaylistPage page.
@@ -16,12 +17,16 @@ import {NodeServerProvider} from "../../providers/node-server/node-server";
   templateUrl: 'playlist.html',
 })
 export class PlaylistPage {
+  private imageURL:{};
   private playlist: any []=[];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController,
     private _nodeProvider: NodeServerProvider) {
+    this.imageURL={
+      url:'../assets/imgs/microphone-png-3-original.jpg'
+    }
   }
 
   addPlaylist() {
@@ -41,6 +46,14 @@ export class PlaylistPage {
   ionViewWillEnter() {
     this.getPlayList();
   }
+  goToPlaylist(name: string) {
+    this.navCtrl.push(AlbumItemsPage, {
+      name:name,
+      imageURL: this.imageURL,
+      isPlaylist: true
+    });
+  }
+
 }
 
 

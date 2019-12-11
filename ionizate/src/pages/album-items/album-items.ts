@@ -13,15 +13,20 @@ export class AlbumItemsPage {
   private id: string;
   private name: string;
   private album: any;
-  private imageUrl: string;
+  private imageUrl: {};
   private tracks: any[] = [];
   private save = false;
   private albumsSaved: any[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private _provider: SpotifyProvider, private _nodeProvider: NodeServerProvider) {
-    this.id = this.navParams.get('id');
     this.name = this.navParams.get('name');
-    this.getAlbum();
+    if (navParams.get('isPlaylist')) {
+      this.imageUrl=navParams.get('imageURL');
+      this.getTracksOfPlaylist();
+    } else {
+      this.id = this.navParams.get('id');
+      this.getAlbum();
+    }
   }
 
 
@@ -46,6 +51,12 @@ export class AlbumItemsPage {
         console.log(error);
       }
     );
+  }
+
+  getTracksOfPlaylist(){
+    this._nodeProvider.getTracksOfPlaylist(this.name).then(data=>{
+      this.tracks = data;
+    });
   }
 
   getAlbum() {

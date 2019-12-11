@@ -1,11 +1,11 @@
 <ion-content class="page-modal-playlist" padding>
 <div class="modalContainer">
-  <h2>Nombre de la playlist:</h2>
+  <h2 class="titleModal">Nombre de la playlist:</h2>
   <ion-input class="inputModal" (ionChange)="setNamePlaylist($event)">{{namePlaylist}}</ion-input>
   <div class="modalButtons">
-    <button (click)="closeModal()">Cancelar</button>
-    <button *ngIf="namePlaylist == '' || namePlaylist == undefined" (click)="savePlaylist(false)">Skip</button>
-    <button *ngIf="namePlaylist != '' && namePlaylist != undefined" (click)="savePlaylist(true)">Crear</button>
+    <button (click)="closeModal()" style="color: white">Cancelar</button>
+    <button *ngIf="namePlaylist == '' || namePlaylist == undefined" (click)="savePlaylist(false)" style="color: rgb(2, 223, 2);">Skip</button>
+    <button *ngIf="namePlaylist != '' && namePlaylist != undefined" (click)="savePlaylist(true)" style="color: rgb(2, 223, 2)">Crear</button>
   </div>
 </div>
 </ion-content>

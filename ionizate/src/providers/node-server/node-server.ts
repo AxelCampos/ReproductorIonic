@@ -60,6 +60,17 @@ export class NodeServerProvider {
 
   }
 
+  getTracksOfPlaylist(name: string) {
+    let list = [];
+    return firebase.firestore().collection('playlist').doc(name).get().then(data => {
+      for (let i = 1; i <= Object.keys(data.data()).length; i++) {
+        list.push(data.data()['song'+i]);
+      }
+      return list;
+    });
+
+  }
+
   setLatestJson(item: any) {
     let idDB: string;
     var valid = true;
@@ -131,13 +142,18 @@ export class NodeServerProvider {
       });
   }
 
-  setPlaylist(id: string, item: any){
+  setPlaylist(id: string, item: any) {
     console.log(item);
     let list;
     firebase.firestore().collection('playlist').doc(id).get().then(data => {
       list = data.data();
-      let song= 'song'+(Object.keys(list).length+1);
-      list[song]=item;
+      if (list == undefined) {
+        list = {};
+        list['song1'] = item;
+      } else {
+        let song = 'song' + (Object.keys(list).length + 1);
+        list[song] = item;
+      }
       firebase.firestore().collection("playlist").doc(id).set(list).then(function () {
         console.log("Document successfully written!");
       });

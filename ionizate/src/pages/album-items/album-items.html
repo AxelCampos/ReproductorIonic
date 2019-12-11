@@ -7,12 +7,13 @@
 <ion-content padding class="page-album-items">
   <div text-center *ngIf="imageUrl">
     <img src="{{imageUrl.url}}" class="imageAlbum"/>
-    <h2 style="color: white">{{album.name}}</h2>
-    <ion-badge *ngIf="save == false" class="followBadge" (click)="saveAlbum()">Guardar</ion-badge>
-    <span *ngIf="save == true" class="spanFollow">
-      <ion-badge class="followingBadge">Guardado</ion-badge>
+    <h2 *ngIf="album" style="color: white">{{album.name}}</h2>
+    <h2 *ngIf="!album" style="color: white">{{name}}</h2>
+    <ion-badge *ngIf="save == false && album" class="followBadge" (click)="saveAlbum()">Guardar</ion-badge>
+    <span *ngIf="save == true && album" class="spanFollow">
+      <ion-badge *ngIf="album" class="followingBadge">Guardado</ion-badge>
     </span>
-    <p style="color: white">{{album.type}} by {{name}}</p>
+    <p *ngIf="album" style="color: white">{{album.type}} by {{name}}</p>
   </div>
   <div *ngIf="tracks?.length>0">
     <ion-list class="itemArtist" *ngFor="let t of tracks; let i = index">

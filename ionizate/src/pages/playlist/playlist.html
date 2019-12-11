@@ -14,11 +14,11 @@
   <div class="divItems" *ngIf="playlist?.length>0">
     <ion-list class="itemArtist" *ngFor="let p of playlist">
       <ion-item class="item">
-        <ion-thumbnail item-start *ngIf="p.images?.length>0">
-          <img src="{{p.images[0].url}}"/>
-        </ion-thumbnail>
-        <h2 class="nameItem">{{p}}</h2>
-        <ion-icon item-end name="md-close"></ion-icon>
+        <ion-avatar item-start>
+          <img src="{{imageURL.url}}"/>
+        </ion-avatar>
+        <h2 class="nameItem" (click)="goToPlaylist(p)">{{p}}</h2>
+        <ion-icon item-end name="md-more"></ion-icon>
       </ion-item>
     </ion-list>
   </div>

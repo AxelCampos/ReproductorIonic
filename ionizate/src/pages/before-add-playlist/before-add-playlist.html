@@ -4,8 +4,8 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content text-center padding>
-  <button (click)="addPlaylist()">Crear nueva playlist</button>
+<ion-content class="page-before-add-playlist" text-center padding>
+  <button class="buttonAddPlaylist" (click)="addPlaylist()">Crear nueva playlist</button>
   <div class="divItems" *ngIf="playlist?.length>0">
     <ion-list class="itemArtist" *ngFor="let p of playlist">
       <ion-item class="item" (click)="saveInPlaylist(p)">
